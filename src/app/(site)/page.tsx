@@ -41,7 +41,7 @@ const HomePage = () => {
             bg-background
           "
                 >
-                    Get Cypress Free
+                    Get Started
                 </Button>
             </div>
             <div
