@@ -24,10 +24,8 @@ const AccordionTrigger = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>
 >(({ className, children, disabled, ...props }, ref) => (
-  // CHANGE set justify content 
   <AccordionPrimitive.Header className="flex justify-between items-center">
     {children}
-    {/* CHANGE Removed flex 1  from this  */}
     <AccordionPrimitive.Trigger
       ref={ref}
       className={cn(
@@ -36,7 +34,6 @@ const AccordionTrigger = React.forwardRef<
       )}
       {...props}
     >
-      {/* //changed disabled */}
       {!disabled && (
         <ChevronDown className="h-4 w-4 shrink-0 transition-transform duration-200" />
       )}
@@ -51,7 +48,7 @@ const AccordionContent = React.forwardRef<
   <AccordionPrimitive.Content
     ref={ref}
     className={cn(
-      'overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down',
+      'overflow-hidden text-sm transition-all duration-300 data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down',
       className
     )}
     {...props}

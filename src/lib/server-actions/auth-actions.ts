@@ -28,6 +28,7 @@ export async function actionSignUpUser({
         .eq('email', email);
 
     if (data?.length) return { error: { message: 'User already exists', data } };
+    console.log('Sono qui',email,password);
     const response = await supabase.auth.signUp({
         email,
         password,
@@ -35,5 +36,6 @@ export async function actionSignUpUser({
             emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}api/auth/callback`,
         },
     });
+    console.log(response);
     return response;
 }

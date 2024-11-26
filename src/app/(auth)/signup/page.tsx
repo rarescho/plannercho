@@ -35,11 +35,11 @@ const SignUpFormSchema = z
         password: z
             .string()
             .describe('Password')
-            .min(6, 'Password must be minimum 6 characters'),
+            .min(6, 'La password deve contenere almeno 6 caratteri'),
         confirmPassword: z
             .string()
             .describe('Confirm Password')
-            .min(6, 'Password must be minimum 6 characters'),
+            .min(6, 'La password deve contenere almeno 6 caratteri'),
     })
     .refine((data) => data.password === data.confirmPassword, {
         message: "Passwords don't match.",
@@ -75,6 +75,7 @@ const Signup = () => {
 
     const isLoading = form.formState.isSubmitting;
     const onSubmit = async ({ email, password }: z.infer<typeof FormSchema>) => {
+        console.log('Sono qui');
         const { error } = await actionSignUpUser({ email, password });
         if (error) {
             setSubmitError(error.message);
@@ -201,10 +202,10 @@ const Signup = () => {
                         <Alert className={confirmationAndErrorStyles}>
                             {!codeExchangeError && <MailCheck className="h-4 w-4" />}
                             <AlertTitle>
-                                {codeExchangeError ? 'Invalid Link' : 'Check your email.'}
+                                {codeExchangeError ? 'Link invalido.' : 'Controlla la tua mail.'}
                             </AlertTitle>
                             <AlertDescription>
-                                {codeExchangeError || 'An email confirmation has been sent.'}
+                                {codeExchangeError || 'È stata inviata una mail di conferma.'}
                             </AlertDescription>
                         </Alert>
                     </>

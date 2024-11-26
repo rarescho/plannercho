@@ -15,6 +15,13 @@
       "when": 1719844793585,
       "tag": "0001_sad_lethal_legion",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1720081811103,
+      "tag": "0002_wild_scorpion",
+      "breakpoints": true
     }
   ]
 }

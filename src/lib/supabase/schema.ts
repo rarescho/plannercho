@@ -1,5 +1,7 @@
 import { pgTable, uuid, timestamp, text } from 'drizzle-orm/pg-core';
-
+import {
+    users,
+} from '../../../migrations/schema';
 export const workspaces = pgTable('workspaces', {
     id: uuid('id').defaultRandom().primaryKey().notNull(),
     createdAt: timestamp('created_at', {
@@ -16,6 +18,7 @@ export const workspaces = pgTable('workspaces', {
     logo: text('logo'),
     bannerUrl: text('banner_url'),
 });
+
 export const folders = pgTable('folders', {
     id: uuid('id').defaultRandom().primaryKey().notNull(),
     createdAt: timestamp('created_at', {
@@ -33,9 +36,9 @@ export const folders = pgTable('folders', {
         .notNull()
         .references(() => workspaces.id, {
             onDelete: 'cascade',
-            onUpdate: 'cascade',
         }),
 });
+
 export const files = pgTable('files', {
     id: uuid('id').defaultRandom().primaryKey().notNull(),
     createdAt: timestamp('created_at', {
@@ -58,6 +61,20 @@ export const files = pgTable('files', {
         .notNull()
         .references(() => folders.id, {
             onDelete: 'cascade',
-            onUpdate: 'cascade',
         }),
+});
+export const collaborators = pgTable('collaborators', {
+    id: uuid('id').defaultRandom().primaryKey().notNull(),
+    workspaceId: uuid('workspace_id')
+        .notNull()
+        .references(() => workspaces.id, { onDelete: 'cascade' }),
+    createdAt: timestamp('created_at', {
+        withTimezone: true,
+        mode: 'string',
+    })
+        .defaultNow()
+        .notNull(),
+    userId: uuid('user_id')
+        .notNull()
+        .references(() => users.id, { onDelete: 'cascade' }),
 });
