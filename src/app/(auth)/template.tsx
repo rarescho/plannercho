@@ -1,20 +1,22 @@
-import React from 'react';
+import React, { Suspense } from "react";
 
 interface TemplateProps {
-    children: React.ReactNode;
+  children: React.ReactNode;
 }
 
 const Template: React.FC<TemplateProps> = ({ children }) => {
-    return (
-        <div
-            className="
+  return (
+    <Suspense fallback={<div>Caricamento...</div>}>
+      <div
+        className="
       h-screen
       p-6 flex 
       justify-center"
-        >
-            {children}
-        </div>
-    );
+      >
+        {children}
+      </div>
+    </Suspense>
+  );
 };
 
 export default Template;
