@@ -15,7 +15,11 @@ const ioHandler = (req: NextApiRequest, res: NextApiResponseServerIo) => {
         const httpServer: NetServer = res.socket.server as any;
         const io = new ServerIO(httpServer, {
             path,
-            addTrailingSlash: false,
+            cors: {
+                origin: 'http://planner.computerhouse.local', // Sostituisci con il tuo dominio
+                methods: ['GET', 'POST'],
+                credentials: true, // Se necessario
+            },
         });
         io.on('connection', (s) => {
             s.on('create-room', (fileId) => {
